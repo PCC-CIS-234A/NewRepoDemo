@@ -6,6 +6,8 @@ import presentation.browser.ShowBrowser;
 import javax.swing.*;
 import java.util.ArrayList;
 
+// This is in my AccountCreation branch, but not in main.
+
 /**
  * Main entry point for the program.
  * <p>
