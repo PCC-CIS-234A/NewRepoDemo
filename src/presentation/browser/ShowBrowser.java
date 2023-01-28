@@ -1,6 +1,7 @@
 package presentation.browser;
 
 import logic.Show;
+import logic.ShowType;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -13,16 +14,25 @@ public class ShowBrowser {
     private JPanel rootPanel;
     private JScrollPane scrollPane;
     private JTable showTable;
+    private JComboBox typeComboBox;
 
     private DefaultTableModel m_ShowTableModel;
 
     public ShowBrowser() {
         // setupTable();
+        setupComboBox();
         fetchData();
     }
 
     public JPanel getRootPanel() {
         return rootPanel;
+    }
+
+    private void setupComboBox() {
+        ArrayList<String> types = ShowType.getTypes();
+        for (String type: types) {
+            System.out.println(type);
+        }
     }
 
     private void setupTable() {

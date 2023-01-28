@@ -16,6 +16,9 @@ public class Database {
     // Some SQL queries.
     private static final String FIND_SHOWS_QUERY =
             "SELECT TOP 50 tconst, primaryTitle FROM title_basics;";
+    private static final String GET_TYPES = "" +
+            "SELECT DISTINCT titleType\n" +
+            "FROM title_basics;";
 
     // The one and only connection object
     private static Connection m_Connection = null;
@@ -72,5 +75,40 @@ public class Database {
         }
         // Return the list of results. Will be an empty list if there was an error.
         return shows;
+    }
+
+
+    /**
+     * Fetch a list of all the types.
+     *
+     * @return The list of show types.
+     */
+    public static ArrayList<String> getTypes() {
+        ResultSet rs = null;
+        ArrayList<String> types = new ArrayList<>();
+        PreparedStatement stmt;
+
+        try {
+            // Create a connection if there isn't one already
+            connect();
+
+            // Prepare a SQL statement
+            stmt = m_Connection.prepareStatement(GET_TYPES);
+
+            // Execute the query returning a result set
+            rs = stmt.executeQuery();
+
+            // For each row in the result set, create a new Show object with the specified values
+            // and add it to the list of results.
+            while (rs.next()) {
+                types.add(rs.getString("titleType"));
+            }
+        } catch (Exception e) {
+            System.err.println("Error: Interrupted or couldn't connect to database.");
+            e.printStackTrace();
+            return null;
+        }
+        // Return the list of results. Will be an empty list if there was an error.
+        return types;
     }
 }
