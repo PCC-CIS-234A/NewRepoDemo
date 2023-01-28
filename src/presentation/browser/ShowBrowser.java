@@ -32,6 +32,7 @@ public class ShowBrowser {
         ArrayList<String> types = ShowType.getTypes();
         for (String type: types) {
             System.out.println(type);
+            typeComboBox.addItem(type);
         }
     }
 
